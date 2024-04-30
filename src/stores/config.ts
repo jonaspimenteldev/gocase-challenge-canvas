@@ -3,7 +3,7 @@ import fabric from "@/plugins/fabric";
 import FontFaceObserver from "fontfaceobserver";
 import getImageUrl from "@/utils/getImageUrl";
 import { FileEvent, Font, State } from "@/types/store";
-import { loadImage, applyStyleToActiveObject } from "@/utils/canvasUtils";
+import { applyStyleToActiveObject } from "@/utils/canvasUtils";
 
 export const useConfigStore = defineStore("config", {
   state: (): State => ({
