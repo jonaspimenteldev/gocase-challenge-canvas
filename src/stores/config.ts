@@ -9,16 +9,13 @@ export const useConfigStore = defineStore("config", {
     ({
       file: {},
       text: {},
+      color: "",
       font: "VT323",
       image: {},
       canvas: {},
       stickers: ["01.png", "02.png", "03.png", "04.png"],
       images: ["01.jpeg", "02.jpeg", "03.jpeg", "04.jpeg"],
-      colors: [
-        { label: "Vermelho", value: "#FF0000" },
-        { label: "Verde", value: "#00FF00" },
-        { label: "Azul", value: "#0000FF" },
-      ],
+      colors: ["#3b82f6", "#eab308", "#ef4444", "#10b981", "#000"],
       fonts: [
         { label: "VT323", value: "VT323" },
         { label: "Quicksand", value: "Quicksand" },
@@ -142,6 +139,7 @@ export const useConfigStore = defineStore("config", {
 
     applyColor(color: string) {
       if(!this.canvas.getActiveObject()) return 
+      this.color = color;
       this.canvas.getActiveObject().set("fill", color);
       this.canvas.requestRenderAll();
     },

@@ -16,12 +16,13 @@ export interface EventFile {
 export interface State {
   file: Record<string, any>;
   text: Record<string, any>;
+  color: string;
   font: string;
   image: Record<string, any>;
   canvas: Record<string, any>;
   stickers: string[];
   images: string[];
-  colors: Color[];
+  colors: Array<string>;
   fonts: Font[];
   config: Record<string, any>;
 }

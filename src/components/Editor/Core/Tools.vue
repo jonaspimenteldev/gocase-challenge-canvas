@@ -43,10 +43,11 @@
           optionValue="value" placeholder="Selecione uma fonte" class="w-full md:w-14rem" />
 
         <!-- Escolher cor -->
-        <h3 class="font-bold text-slate-800">Cor da fonte</h3>
-        <input type="color" v-model="colors" @change="store.applyColor(colors)"
-          class="block h-10 p-1 bg-white border-2 rounded-lg cursor-pointer border-slate-300 w-14 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700"
-          id="hs-color-input" value="#2563eb" title="Choose your color">
+        <div class="flex gap-2">
+          <button v-for="item in store.colors" :class="{'border-slate-500/75' : store.color === item }" :style="`background-color: ${item}`" class="w-[24px] h-[24px] border-2 border-white hover:border-slate-500/75  rounded-full cursor-pointer" @click="store.applyColor(item)"></button>
+        </div>
+        
+       
           
       </div>
     </div>
