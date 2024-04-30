@@ -1,5 +1,3 @@
-import { Files, Target } from "lucide-vue-next";
-
 export interface Color {
   label: string;
   value: string;
@@ -11,7 +9,7 @@ export interface Font {
 }
 
 export interface EventFile {
-  target: EventTarget & Target & Files;
+  target: EventTarget;
   files: Array<string>;
 }
 

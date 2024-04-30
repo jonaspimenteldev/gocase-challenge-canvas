@@ -158,7 +158,7 @@ export const useConfigStore = defineStore("config", {
       this.config = config;
     },
 
-    setFonts(fonts: Record<string,unknown>) {
+    setFonts(fonts: { label: string; value: string; }[]) {
       this.fonts = fonts;
     },
 

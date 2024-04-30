@@ -81,8 +81,8 @@ const fonts = ref('')
 const colors = ref('')
 
 const saveCoverInPNG = () => {
-  let canvas = document.getElementById('canvaHtml5');
-  let dataURL = canvas.toDataURL('image/png');
+  let canvas = document.getElementById('canvaHtml5') as HTMLCanvasElement;
+  let dataURL = canvas?.toDataURL('image/png');
 
   let link = document.createElement('a');
   link.href = dataURL;
