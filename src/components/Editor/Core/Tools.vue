@@ -79,7 +79,7 @@ import getImageUrl from '@/utils/getImageUrl';
 const store = useConfigStore()
 
 const fonts = ref('')
-const colors = ref('')
+
 
 const saveCoverInPNG = () => {
   let canvas = document.getElementById('canvaHtml5') as HTMLCanvasElement;
