@@ -15,7 +15,7 @@ export const useConfigStore = defineStore("config", {
       canvas: {},
       stickers: ["01.png", "02.png", "03.png", "04.png"],
       images: ["01.jpeg", "02.jpeg", "03.jpeg", "04.jpeg"],
-      colors: ["#3b82f6", "#eab308", "#ef4444", "#10b981", "#000"],
+      colors: ["#FFF", "#3b82f6", "#eab308", "#ef4444", "#10b981", "#000"],
       fonts: [
         { label: "VT323", value: "VT323" },
         { label: "Quicksand", value: "Quicksand" },
