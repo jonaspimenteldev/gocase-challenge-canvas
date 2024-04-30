@@ -36,5 +36,5 @@ onMounted(() => {
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Pacifico|VT323|Quicksand|Inconsolata');
+@import url('https://fonts.googleapis.com/css?family=Pacifico|VT323|Quicksand|Inconsolata|Farsan|Borel|Dekko|Roboto');
 </style>

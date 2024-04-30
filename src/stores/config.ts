@@ -17,6 +17,10 @@ export const useConfigStore = defineStore("config", {
       images: ["01.jpeg", "02.jpeg", "03.jpeg", "04.jpeg"],
       colors: ["#FFF", "#3b82f6", "#eab308", "#ef4444", "#10b981", "#000"],
       fonts: [
+        { label: "Farsan", value: "Farsan" },
+        { label: "Borel", value: "Borel" },
+        { label: "Roboto", value: "Roboto" },
+        { label: "Dekko", value: "Dekko" },
         { label: "VT323", value: "VT323" },
         { label: "Quicksand", value: "Quicksand" },
         { label: "Inconsolata", value: "Inconsolata" },
