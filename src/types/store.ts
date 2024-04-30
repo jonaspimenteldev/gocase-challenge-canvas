@@ -18,11 +18,19 @@ export interface State {
   text: Record<string, any>;
   color: string;
   font: string;
-  image: Record<string, any>;
+  image: any;
   canvas: Record<string, any>;
   stickers: string[];
   images: string[];
   colors: Array<string>;
   fonts: Font[];
   config: Record<string, any>;
+}
+
+export interface Font {
+  label: string;
+  value: string;
+}
+export interface FileEvent {
+  files: File[];
 }

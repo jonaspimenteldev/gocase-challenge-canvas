@@ -2,42 +2,44 @@ import { defineStore } from "pinia";
 import fabric from "@/plugins/fabric";
 import FontFaceObserver from "fontfaceobserver";
 import getImageUrl from "@/utils/getImageUrl";
-import { State } from "@/types/store";
+import { FileEvent, Font, State } from "@/types/store";
+import { loadImage, applyStyleToActiveObject } from "@/utils/canvasUtils";
 
 export const useConfigStore = defineStore("config", {
-  state: () =>
-    ({
-      file: {},
-      text: {},
-      color: "",
-      font: "VT323",
-      image: {},
-      canvas: {},
-      stickers: ["01.png", "02.png", "03.png", "04.png"],
-      images: ["01.jpeg", "02.jpeg", "03.jpeg", "04.jpeg"],
-      colors: ["#FFF", "#3b82f6", "#eab308", "#ef4444", "#10b981", "#000"],
-      fonts: [
-        { label: "Farsan", value: "Farsan" },
-        { label: "Borel", value: "Borel" },
-        { label: "Roboto", value: "Roboto" },
-        { label: "Dekko", value: "Dekko" },
-        { label: "VT323", value: "VT323" },
-        { label: "Quicksand", value: "Quicksand" },
-        { label: "Inconsolata", value: "Inconsolata" },
-      ],
-      config: {},
-    } as State),
+  state: (): State => ({
+    file: {},
+    text: {},
+    color: "",
+    font: "VT323",
+    image: {},
+    canvas: {},
+    stickers: ["01.png", "02.png", "03.png", "04.png"],
+    images: ["01.jpeg", "02.jpeg", "03.jpeg", "04.jpeg"],
+    colors: ["#FFF", "#3b82f6", "#eab308", "#ef4444", "#10b981", "#000"],
+    fonts: [
+      { label: "Farsan", value: "Farsan" },
+      { label: "Borel", value: "Borel" },
+      { label: "Roboto", value: "Roboto" },
+      { label: "Dekko", value: "Dekko" },
+      { label: "VT323", value: "VT323" },
+      { label: "Quicksand", value: "Quicksand" },
+      { label: "Inconsolata", value: "Inconsolata" },
+    ],
+    config: {},
+  }),
   getters: {},
   actions: {
     removeItem() {
       const activeObjects = this.canvas.getActiveObjects();
+
       this.canvas.discardActiveObject();
+
       if (activeObjects.length) {
         this.canvas.remove.apply(this.canvas, activeObjects);
       }
     },
 
-    async handleFileChange($event: { files: File[] }) {
+    async handleFileChange($event: FileEvent) {
       const file = $event.files[0];
 
       const reader = new FileReader();
@@ -84,7 +86,7 @@ export const useConfigStore = defineStore("config", {
       this.canvas.renderAll();
     },
 
-    applyBackground(imageName: any) {
+    applyBackground(imageName: string) {
       const url = getImageUrl(`wallpapers/${imageName}`);
 
       fabric.Image.fromURL(url, (img: any) => {
@@ -135,19 +137,18 @@ export const useConfigStore = defineStore("config", {
       });
     },
 
-    applyFont(font: string) {
-      if(!this.canvas.getActiveObject()) return 
-      this.canvas.getActiveObject().set("fontFamily", font);
-      this.canvas.requestRenderAll();
+    async applyFont(font: string) {
+      const fonts = new FontFaceObserver(font);
+      await fonts.load().then(() => {
+        applyStyleToActiveObject(this.canvas, { fontFamily: font });
+      });
     },
 
     applyColor(color: string) {
-      if(!this.canvas.getActiveObject()) return 
       this.color = color;
-      this.canvas.getActiveObject().set("fill", color);
-      this.canvas.requestRenderAll();
+      applyStyleToActiveObject(this.canvas, { fill: color });
     },
-    
+
     loadAndUse(font: string) {
       const fonts = new FontFaceObserver(font);
       fonts.load().then(() => {
@@ -156,15 +157,15 @@ export const useConfigStore = defineStore("config", {
       });
     },
 
-    setConfig(config: Record<string,unknown>) {
+    setConfig(config: Record<string, unknown>) {
       this.config = config;
     },
 
-    setFonts(fonts: { label: string; value: string; }[]) {
+    setFonts(fonts: Font[]) {
       this.fonts = fonts;
     },
 
-    setCanvas(canvas: Record<string,unknown>) {
+    setCanvas(canvas: Record<string, unknown>) {
       this.canvas = canvas;
     },
   },
